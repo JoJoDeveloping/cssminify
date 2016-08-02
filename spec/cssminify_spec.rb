@@ -128,7 +128,53 @@ describe "CSSminify" do
       EOS
       CSSminify.compress(source).should eq('a{margin:0;background-position:0 0;padding:0}')
     end
-  
+
+    it "simplifies zero values preserving unit when necessary" do
+      source = <<-EOS
+        @-webkit-keyframes anim {
+          0% {
+            left: 0;
+          }
+          100% {
+            left: -100%;
+          }
+        }
+        @-moz-keyframes anim {
+          0% {
+            left: 0;
+          }
+          100% {
+            left: -100%;
+          }
+        }
+        @-ms-keyframes anim {
+          0% {
+            left: 0;
+          }
+          100% {
+            left: -100%;
+          }
+        }
+        @-o-keyframes anim {
+          0% {
+            left: 0;
+          }
+          100% {
+            left: -100%;
+          }
+        }
+        @keyframes anim {
+          0% {
+            left: 0;
+          }
+          100% {
+            left: -100%;
+          }
+        }
+      EOS
+      CSSminify.compress(source).should eq('@-webkit-keyframes anim{0%{left:0}100%{left:-100%}}@-moz-keyframes anim{0%{left:0}100%{left:-100%}}@-ms-keyframes anim{0%{left:0}100%{left:-100%}}@-o-keyframes anim{0%{left:0}100%{left:-100%}}@keyframes anim{0%{left:0}100%{left:-100%}}')
+    end
+
     it "removes leading zeros from floats" do
       source = <<-EOS
         .classname {
@@ -137,7 +183,25 @@ describe "CSSminify" do
       EOS
       CSSminify.compress(source).should eq('.classname{margin:.6px .333pt 1.2em 8.8cm}')
     end
-  
+
+    it "removes leading zeros from groups" do
+      source = <<-EOS
+        a {
+          margin: 0px 0pt 0em 0%;
+          _padding-top: 0ex;
+          background-position: 0 0;
+          padding: 0in 0cm 0mm 0pc;
+          transition: opacity .0s;
+          transition-delay: 0.0ms;
+          transform: rotate3d(0grad, 0rad, 0deg);
+          pitch: 0khz;
+          pitch:
+        0hz /* intentionally on next line */;
+        }
+      EOS
+      CSSminify.compress(source).should eq('a{margin:0;_padding-top:0;background-position:0 0;padding:0;transition:opacity 0;transition-delay:0;transform:rotate3d(0,0,0);pitch:0;pitch:0}')
+    end
+
     it "simplifies color values but preserves filter properties, RGBa values and ID strings" do
       source = <<-EOS
         .color-me {

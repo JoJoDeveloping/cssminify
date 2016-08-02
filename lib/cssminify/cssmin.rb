@@ -180,9 +180,20 @@ module CssCompressor
     #
     # Replace 0(px,em,%) with 0
     #
-    css = css.gsub(/(^|[^0-9])(?:0?\.)?0(?:px|em|%|in|cm|mm|pc|pt|ex|deg|g?rad|m?s|k?hz)/i) { $1.to_s + '0' }
-    
-    #
+    oldCss = '';
+    while oldCss != css do
+      oldCss = css
+      css = css.gsub(/(?i)(^|: ?)((?:[0-9a-z\-\.]+ )*?)?(?:0?\.)?0(?:px|em|%|in|cm|mm|pc|pt|ex|deg|g?rad|m?s|k?hz)/i) { "#{$1.to_s}#{$2.to_s}0" }
+    end
+
+    oldCss = '';
+    while oldCss != css do
+      oldCss = css
+      css = css.gsub(/(?i)\( ?((?:[0-9a-z\-\.]+[ ,])*)?(?:0?\.)?0(?:px|em|%|in|cm|mm|pc|pt|ex|deg|g?rad|m?s|k?hz)/i) { "(#{$1.to_s}0" }
+    end
+
+    css = css.gsub(/([0-9])\.0(px|em|%|in|cm|mm|pc|pt|ex|deg|g?rad|m?s|k?hz| |;)/i) {"#{$1.to_s}#{$2.to_s}"}
+
     # Replace 0 0 0 0; with 0
     #
     css = css.gsub(/:0 0 0 0(;|\})/) { ':0' + $1.to_s }
