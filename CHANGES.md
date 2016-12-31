@@ -1,3 +1,8 @@
+### 2.0.0 (31 Dec 2016)
+
+* Fork, including github.com/r7com/cssminify zero value changes,
+  Recommit to rubygems as cssminify2
+
 ### 1.0.2 (30 June 2012)
 
 * Removed unnecessary Bundler dependency

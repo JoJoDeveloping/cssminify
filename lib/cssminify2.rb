@@ -1,14 +1,14 @@
 # coding: utf-8
 
-require "cssminify/cssmin"
-require "cssminify/version"
+require "CSSminify2/cssmin"
+require "CSSminify2/version"
 
-class CSSminify
-  
+class CSSminify2
+
   def initialize
   end
-  
-  
+
+
   #
   # Compress CSS with YUI
   #
@@ -18,8 +18,8 @@ class CSSminify
   def self.compress(source, length = 5000)
     self.new.compress(source, length)
   end
-  
-  
+
+
   #
   # Compress CSS with YUI
   #
@@ -28,7 +28,7 @@ class CSSminify
   # @return [String] Compressed CSS
   def compress(source = '', length = 5000)
     source = source.respond_to?(:read) ? source.read : source.to_s
-    
+
     CssCompressor.compress(source, length)
   end
 end
