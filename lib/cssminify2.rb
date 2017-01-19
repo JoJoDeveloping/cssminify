@@ -1,7 +1,7 @@
 # coding: utf-8
 
-require "CSSminify2/cssmin"
-require "CSSminify2/version"
+require "cssminify2/cssmin"
+require "cssminify2/version"
 
 class CSSminify2
 
