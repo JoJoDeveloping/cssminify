@@ -1,3 +1,7 @@
+### 3.1.1 (19 Jun 2017)
+
+* Merge pull request to fix case sensitivity issues
+
 ### 2.0.0 (31 Dec 2016)
 
 * Fork, including github.com/r7com/cssminify zero value changes,
