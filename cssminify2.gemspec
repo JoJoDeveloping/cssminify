@@ -4,8 +4,11 @@ require "cssminify2/version"
 
 Gem::Specification.new do |s|
   s.name        = "cssminify2"
-  s.version     = CSSminify2::VERSION
-  s.version     = "#{ENV['TRAVIS_TAG']}" if ENV['TRAVIS']
+  if ENV['TRAVIS_TAG']
+    s.version     = "#{ENV['TRAVIS_TAG']}"
+  else
+    s.version     = CSSminify2::VERSION
+  end
   s.author      = "Matt Spurrier"
   s.email       = "matthew@spurrier.com.au"
   s.homepage    = "https://github.com/digitalsparky/cssminify"
