@@ -1,4 +1,4 @@
-# CSSminify
+# CSSminify [![Travis Build](https://travis-ci.org/digitalsparky/cssminify.svg?branch=master)](https://travis-ci.org/digitalsparky/cssminify)
 
 CSS minification with YUI compressor, but as native Ruby port.
 
