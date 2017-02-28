@@ -1,9 +1,3 @@
-language: ruby
-rvm:
-- 1.9.2
-- 1.9.3
-- jruby-19mode
-script: bundle exec rspec spec
 deploy:
   provider: rubygems
   api_key:
@@ -12,3 +6,9 @@ deploy:
   on:
     tags: true
     repo: digitalsparky/cssminify
+language: ruby
+rvm:
+- 1.9.2
+- 1.9.3
+- jruby-19mode
+script: bundle exec rspec spec
