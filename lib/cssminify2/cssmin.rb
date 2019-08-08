@@ -373,7 +373,7 @@ module CssCompressor
 
       if foundTerminator
         token = css[startIndex...endIndex]
-        token = token.gsub(/\s+/, '')
+        # token = token.gsub(/\s+/, '')
         @@preservedTokens << token
 
         new_css += "url(___YUICSSMIN_PRESERVED_TOKEN_" + (@@preservedTokens.length - 1).to_s + "___)"
