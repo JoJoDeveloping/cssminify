@@ -1,0 +1,4 @@
+.content { 
+    width: calc(35% - (30px / 2)); 
+    background-image: url("./bg.png");
+}
