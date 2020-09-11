@@ -142,7 +142,8 @@ module CssCompressor
     # Swap out any pseudo-class colons with the token, and then swap back.
     #
     css = css.gsub(/(^|\})(([^\{:])+:)+([^\{]*\{)/) { |m| m.gsub(/:/, '___YUICSSMIN_PSEUDOCLASSCOLON___') }
-    css = css.gsub(/\s+([!{};:>+\(\)\],])/) { $1.to_s }
+    css = css.gsub(/\s+([!{};:>+\)\],])/) { $1.to_s }
+    css = css.gsub(/([^\+\-\/\*])\s+\(/) { $1.concat('(') }
     css = css.gsub(/___YUICSSMIN_PSEUDOCLASSCOLON___/, ':')
 
     #

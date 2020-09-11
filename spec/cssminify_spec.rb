@@ -304,6 +304,17 @@ describe "CSSminify2" do
       CSSminify2.compress(source).should eq('#elem{width:100px;voice-family:"\"}\"";voice-family:inherit;width:200px}html>body #elem{width:200px}')
     end
 
+    it "keeps a space before opening brace in calc" do
+      source = <<-EOS
+        .content { 
+          height: calc(35% - 30px);
+          width: calc(35% - (30px / 2)); 
+          background-image: url("./bg.png");
+        }
+      EOS
+      CSSminify2.compress(source).should eq('.content{height:calc(35% - 30px);width:calc(35% - (30px / 2));background-image:url("./bg.png")}')
+    end
+
     it "should pass all the original tests included in the YUI compressor package" do
       puts "Now running original YUI compressor test files:"
 
